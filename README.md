@@ -49,7 +49,8 @@ From the read test sample script:
 ```C#
 md.uaModelDesignManager.XmlSerializerNamespaces.Add("opc", "http://opcfoundation.org/UA/ModelDesign.xsd");
 md.uaModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfoundation.org/OPCUAServer");
-
+// which then gets used at serialization
+XmlSerializer.Serialize(xmlWriter, ModelDesign, XmlSerializerNamespaces);
 ```
 
 ### Object Types have Managers that makes it more simply to create and add content
