@@ -92,7 +92,7 @@ Some of these things took a long time to figure out...
 
 ### Model Compilation Requires Model.xml Files to be Pretty-Printed
 
-We found that some of the most difficulat things to figure out is the "what's the minimum amount of stuff needed to make this work" part. Among those excercises we discovered that the ModelCompiler needs to be fed with properly formated xml, i.e. that Indent setting is a must:
+We found that some of the most difficulat things to figure out is the "what's the minimum amount of stuff needed to make this work" part. Among those excercises we discovered that the ModelCompiler needs to be fed with properly formated xml, i.e. that Indent setting and the resulting line breaks are a must:
 
 ```C#
 using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }))
