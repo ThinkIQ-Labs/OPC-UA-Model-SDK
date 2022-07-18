@@ -19,18 +19,18 @@ animalType.uaPropertyDesignManager.AddBasicPropertyDesign(
     new XmlQualifiedName("String", opcUaNameSpace)
     );
 
-Console.WriteLine(md.GenerateXML());
-Console.WriteLine(md.GenerateCSV());
+Console.WriteLine(md.uaModelDesignManager.GenerateXML());
+Console.WriteLine(md.uaModelDesignManager.GenerateCSV());
 
 var dirInfo = Directory.CreateDirectory($".\\out");
 
 var xmlFileUrl = $"{dirInfo.FullName}\\test2.xml";
-string aXmlFileContent = md.GenerateXML(xmlFileUrl);
+string aXmlFileContent = md.uaModelDesignManager.GenerateXML(xmlFileUrl);
 Console.WriteLine(aXmlFileContent);
 
 var csvFileUrl = $"{dirInfo.FullName}\\test2.csv";
-string aCsvFileContent = md.GenerateCSV(csvFileUrl);
+string aCsvFileContent = md.uaModelDesignManager.GenerateCSV(csvFileUrl);
 Console.WriteLine(aCsvFileContent);
 
 var compilerExecutable = @"C:\Users\Public\source\repos\UA-ModelCompiler\build\bin\Debug\net6.0\Opc.Ua.ModelCompiler.exe";
-md.CompileNodeset(compilerExecutable, xmlFileUrl, csvFileUrl, dirInfo.FullName);
+md.uaModelDesignManager.CompileNodeset(compilerExecutable, xmlFileUrl, csvFileUrl, dirInfo.FullName);
