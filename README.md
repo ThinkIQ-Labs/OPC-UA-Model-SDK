@@ -41,7 +41,7 @@ From the read test sample script:
 // re-serializing will produce an almost identical xml file
 uaModelDesign md = new uaModelDesign("./data/modeldesign.xml");
 ```
-### XML Namespaces are attached to XMLSerializer
+### XML Namespaces are Attached to XMLSerializer
 
 Most sample model.xml files create XML Namespace prefixes in the ModelDesign root element. This cannot be done in the ModelDesign.cs scope, but must be added to the XMLSerializer instead.
 
@@ -53,7 +53,7 @@ md.uaModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfou
 XmlSerializer.Serialize(xmlWriter, ModelDesign, XmlSerializerNamespaces);
 ```
 
-### Object Types have Managers that makes it more simply to create and add content
+### Object Types have Managers that Make it Easier to Create and Add Content
 
 Adding custom types, and subsequently adding proeperties to types can be done like so:
 
