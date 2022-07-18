@@ -100,13 +100,13 @@ using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent =
 
 ### DataTime Serialization with Specific Formating
 
-It's very straight forward to add a time attribute when manually compiling a XML file (thanks Stefan for throwing that in...):
+It's very straight forward to add a UTC-style time attribute when manually compiling a XML file (thanks Stefan for throwing that in...):
 
 From Dr. Stefan Profanter's animal type tutorial:
 ```XML
 TargetPublicationDate="2019-04-01T00:00:00Z"
 ```
-This can be achieved using an XMLSerializer by extending 
+This is not easy using straight forward XML Serialization, but can be achieved by extending the partial ModelDesign.cs class (Prof. Postol - your ModelDesign.cs class is not partial, so this won't work with your nuget package):
 
 ```C#
 // we can extend the partial ModelDesign class to include a String attribute for our DateTime field
@@ -137,7 +137,7 @@ XmlSerializer serializer2 = new XmlSerializer(typeof(ModelDesign), toXmlIgnoreCl
 
 ### Creation of XML Namespaces without Prefix
 
-Finally, a default XML Namespace without a prefix can be created using string.Empty (yes, we tried "").
+Finally, a default XML Namespace without a prefix can be created using string.Empty (Yes, we tried "". No, it didn't work.).
 
 ```C#
 md.uaModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfoundation.org/OPCUAServer");
