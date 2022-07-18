@@ -4,14 +4,14 @@
 
 Studying OPC UA, and in particular the Information Modeling aspects of it, we quickly realized that most established code base revolves around the cummunication bits and pieces. There is, however little guidance available for procedural creation of Information Models. The advise is either use a GUI tool, such as the excellent UaModeler by Unified Automation, or roll your own XML and then compile it using the UA Model Compiler.
 
-In particular for interoperability projects it is important to create such Information Models using code. Simply doing it "according to the ModelDesign.xsd" is harder than it sounds - especially if one wants to reproduce some of the examlple model designs out there.
+In particular for interoperability projects it is important to be able create such Information Models using code. Simply doing it "according to the ModelDesign.xsd" is harder than it sounds - especially if one wants to reproduce some of the examlple model designs out there.
 
 ## Excellent Online Posts and Tutorials
 
 This list is by no means complete, but these 2 references were especially helpful:
 
-- Macheronte.com: https://www.macheronte.com/en/opc-ua-model-design-lets-create-a-data-model/
 - Dr. Stefan Profanter: https://opcua.rocks/custom-information-models/
+- Macheronte.com: https://www.macheronte.com/en/opc-ua-model-design-lets-create-a-data-model/
 
 ## Reference Repos
 
@@ -39,20 +39,21 @@ From the read test sample script:
 // this will parse the xml file and start a model
 // minor adjustments can be added to address TargetNamespace and XmlSerializerNamespaces
 // re-serializing will produce an almost identical xml file
-uaModelDesign md = new uaModelDesign("./data/modeldesign.xml");
+var md = new uaModelDesign("./data/modeldesign.xml");
 ```
-### XML Namespaces are attached to XMLSerializer
+### XML Namespaces are Attached to XMLSerializer
 
-Most sample model.xml files create XML Namespace prefixes in the ModelDesign header. This cannot be done in the ModelDesign.cs scope, but must be added to the XMLSerializer instead.
+Most sample model.xml files create XML Namespace prefixes in the ModelDesign root element. This cannot be done in the ModelDesign.cs scope, but must be added to the XMLSerializer instead.
 
 From the read test sample script:
 ```C#
 md.uaModelDesignManager.XmlSerializerNamespaces.Add("opc", "http://opcfoundation.org/UA/ModelDesign.xsd");
 md.uaModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfoundation.org/OPCUAServer");
-
+// which then gets used at serialization
+XmlSerializer.Serialize(xmlWriter, ModelDesign, XmlSerializerNamespaces);
 ```
 
-### Object Types have Managers that makes it more simply to create and add content
+### Object Types have Managers that Make it Easier to Create and Add Content
 
 Adding custom types, and subsequently adding proeperties to types can be done like so:
 
@@ -91,7 +92,7 @@ Some of these things took a long time to figure out...
 
 ### Model Compilation Requires Model.xml Files to be Pretty-Printed
 
-We found that some of the most difficulat things to figure out is the "what's the minimum amount of stuff needed to make this work" part. Among those excercises we discovered that the ModelCompiler needs to be fed with properly formated xml, i.e. that Indent setting is a must:
+We found that some of the most difficulat things to figure out is the "what's the minimum amount of stuff needed to make this work" part. Among those excercises we discovered that the ModelCompiler needs to be fed with properly formated xml, i.e. that Indent setting and the resulting line breaks are a must:
 
 ```C#
 using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }))
@@ -99,13 +100,13 @@ using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent =
 
 ### DataTime Serialization with Specific Formating
 
-It's very straight forward to add a time attribute when manually compiling a XML file (thanks Stefan for throwing that in...):
+It's very straight forward to add a UTC-style time attribute when manually compiling a XML file (thanks Stefan for throwing that in...):
 
 From Dr. Stefan Profanter's animal type tutorial:
 ```XML
 TargetPublicationDate="2019-04-01T00:00:00Z"
 ```
-This can be achieved using an XMLSerializer by extending 
+This is not easy using straight forward XML Serialization, but can be achieved by extending the partial ModelDesign.cs class (Prof. Postol - your ModelDesign.cs class is not partial, so this won't work with your nuget package):
 
 ```C#
 // we can extend the partial ModelDesign class to include a String attribute for our DateTime field
@@ -136,7 +137,7 @@ XmlSerializer serializer2 = new XmlSerializer(typeof(ModelDesign), toXmlIgnoreCl
 
 ### Creation of XML Namespaces without Prefix
 
-Finally, a default XML Namespace without a prefix can be created using string.Empty (yes, we tried "").
+Finally, a default XML Namespace without a prefix can be created using string.Empty (Yes, we tried "". No, it didn't work.).
 
 ```C#
 md.uaModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfoundation.org/OPCUAServer");
