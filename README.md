@@ -43,7 +43,7 @@ uaModelDesign md = new uaModelDesign("./data/modeldesign.xml");
 ```
 ### XML Namespaces are attached to XMLSerializer
 
-Most sample model.xml files create XML Namespace prefixes in the ModelDesign header. This cannot be done in the ModelDesign.cs scope, but must be added to the XMLSerializer instead.
+Most sample model.xml files create XML Namespace prefixes in the ModelDesign root element. This cannot be done in the ModelDesign.cs scope, but must be added to the XMLSerializer instead.
 
 From the read test sample script:
 ```C#
