@@ -10,7 +10,7 @@ namespace ua.model.sdk.Model
 {
     public class uaPropertyDesign
     {
-        PropertyDesign PropertyDesign { get; set; }
+        public PropertyDesign PropertyDesign { get; set; }
 
         public List<uaPropertyDesign> uaPropertyDesigns
         {
