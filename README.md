@@ -4,7 +4,7 @@
 
 Studying OPC UA, and in particular the Information Modeling aspects of it, we quickly realized that most established code base revolves around the cummunication bits and pieces. There is, however little guidance available for procedural creation of Information Models. The advise is either use a GUI tool, such as the excellent UaModeler by Unified Automation, or roll your own XML and then compile it using the UA Model Compiler.
 
-In particular for interoperability projects it is important to create such Information Models using code. Simply doing it "according to the ModelDesign.xsd" is harder than it sounds - especially if one wants to reproduce some of the examlple model designs out there.
+In particular for interoperability projects it is important to be able create such Information Models using code. Simply doing it "according to the ModelDesign.xsd" is harder than it sounds - especially if one wants to reproduce some of the examlple model designs out there.
 
 ## Excellent Online Posts and Tutorials
 
