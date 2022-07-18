@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<opc:ModelDesign
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:opc="http://opcfoundation.org/UA/ModelDesign.xsd"
+xmlns:ua="http://opcfoundation.org/UA/"
+xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd"
+xmlns="http://opcfoundation.org/OPCUAServer"
+TargetNamespace="http://opcfoundation.org/OPCUAServer">
+
+	<opc:Namespaces>
+		<opc:Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</opc:Namespace>
+		<opc:Namespace Name="OPCUAServer" Prefix="OPCUAServer">http://opcfoundation.org/OPCUAServer</opc:Namespace>
+	</opc:Namespaces>
+
+	<opc:ObjectType SymbolicName="GenericSensorType" BaseType="ua:BaseObjectType">
+		<opc:Description>A generic sensor.</opc:Description>
+		<opc:Children>
+			<opc:Variable SymbolicName="Value" DataType="ua:Double" ValueRank="Scalar" TypeDefinition="ua:AnalogItemType" AccessLevel="Read" />
+		</opc:Children>
+	</opc:ObjectType>
+
+	<opc:ObjectType SymbolicName="TemperatureSensor" BaseType="GenericSensorType">
+		<opc:Description>A temperature sensor.</opc:Description>
+	</opc:ObjectType>
+
+	<opc:ObjectType SymbolicName="ProximitySensor" BaseType="GenericSensorType">
+		<opc:Description>A proximity sensor.</opc:Description>
+	</opc:ObjectType>
+
+	<opc:ObjectType SymbolicName="MotorConveyor" BaseType="ua:BaseObjectType">
+		<opc:Description>A motor.</opc:Description>
+		<opc:Children>
+			<opc:Variable SymbolicName="Speed" DataType="ua:Double" ValueRank="Scalar" TypeDefinition="ua:AnalogItemType" AccessLevel="ReadWrite" />
+			<opc:Method SymbolicName="Start" ModellingRule="Mandatory"></opc:Method>
+			<opc:Method SymbolicName="Stop" ModellingRule="Mandatory"></opc:Method>
+		</opc:Children>
+	</opc:ObjectType>
+
+	<opc:ObjectType SymbolicName="MachineType" BaseType="ua:FolderType">
+		<opc:Children>
+			<opc:Object SymbolicName="Temperature" TypeDefinition="TemperatureSensor" SupportsEvents="true">
+				<opc:BrowseName>Temperature</opc:BrowseName>
+			</opc:Object>
+			<opc:Object SymbolicName="Proximity" TypeDefinition="ProximitySensor" SupportsEvents="true">
+				<opc:BrowseName>Proximity</opc:BrowseName>
+			</opc:Object>
+			<opc:Object SymbolicName="Conveyor" TypeDefinition="MotorConveyor" SupportsEvents="true">
+				<opc:BrowseName>Conveyor</opc:BrowseName>
+			</opc:Object>
+		</opc:Children>
+	</opc:ObjectType>
+	
+	<opc:ObjectType SymbolicName="OPCUAServerType" BaseType="ua:BaseObjectType" SupportsEvents="true">
+		<opc:Description>A production batch plant.</opc:Description>
+		<opc:Children>
+			<opc:Object SymbolicName="Machine" TypeDefinition="MachineType" SupportsEvents="true">
+				<opc:BrowseName>Machine</opc:BrowseName>
+			</opc:Object>
+		</opc:Children>
+	</opc:ObjectType>
+		
+	<opc:Object SymbolicName="OPCUAServer1" TypeDefinition="OPCUAServerType" SupportsEvents="true">
+		<opc:BrowseName>Line</opc:BrowseName>
+		<opc:References>
+			<opc:Reference IsInverse="true">
+				<opc:ReferenceType>ua:Organizes</opc:ReferenceType>
+				<opc:TargetId>ua:ObjectsFolder</opc:TargetId>
+			</opc:Reference>
+		</opc:References>
+	</opc:Object>
+	
+</opc:ModelDesign>

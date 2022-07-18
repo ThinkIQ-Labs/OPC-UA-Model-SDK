@@ -28,14 +28,15 @@ namespace ua.model.sdk.Model
             get
             {
                 var returnObject = new Dictionary<string, uaNameSpace>();
-                foreach(var aNameSpace in ModelDesign.Namespaces)
+                if (ModelDesign.Namespaces == null) ModelDesign.Namespaces = new Namespace[] { };
+                foreach (var aNameSpace in ModelDesign.Namespaces)
                 {
-                    returnObject.Add(aNameSpace.XmlPrefix, new uaNameSpace(aNameSpace));
+                    returnObject.Add(aNameSpace.Name, new uaNameSpace(aNameSpace));
                 }
                 return returnObject;
             }
         }
-        
+
         private uaNameSpaceManager _uaNameSpaceManager;
         public uaNameSpaceManager uaNameSpaceManager
         {
@@ -53,7 +54,7 @@ namespace ua.model.sdk.Model
             {
                 var returnObject = new List<uaObjectTypeDesign>();
                 if (ModelDesign.Items == null) ModelDesign.Items = new NodeDesign[] { };
-                foreach (ObjectTypeDesign aObjectTypeDesign in ModelDesign.Items.Where(x=>x.GetType()==typeof(ObjectTypeDesign)))
+                foreach (ObjectTypeDesign aObjectTypeDesign in ModelDesign.Items.Where(x => x.GetType() == typeof(ObjectTypeDesign)))
                 {
                     returnObject.Add(new uaObjectTypeDesign(aObjectTypeDesign));
                 }
@@ -70,13 +71,12 @@ namespace ua.model.sdk.Model
                 return _uaObjectTypeDesignManager;
             }
         }
-        
-        
+
+
         public uaModelDesign(ModelDesign modelDesign)
         {
             ModelDesign = modelDesign;
         }
-        
 
         public uaModelDesign(string domain, string name)
         {
@@ -84,6 +84,9 @@ namespace ua.model.sdk.Model
             ModelDesign = new ModelDesign();
             ModelDesign.TargetNamespace = $"{domain}/{name}/";
             ModelDesign.TargetXmlNamespace = $"{domain}/{name}/";
+
+            uaModelDesignManager.XmlSerializerNamespaces.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            uaModelDesignManager.XmlSerializerNamespaces.Add("xsd", "http://www.w3.org/2001/XMLSchema");
 
             uaModelDesignManager.XmlSerializerNamespaces.Add("uax", "http://opcfoundation.org/UA/2008/02/Types.xsd");
             uaModelDesignManager.XmlSerializerNamespaces.Add("ua", "http://opcfoundation.org/UA/");
@@ -94,6 +97,20 @@ namespace ua.model.sdk.Model
 
         }
 
+        public uaModelDesign(string fileUrl)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(ModelDesign));
+            using (FileStream fileStream = new FileStream(fileUrl, FileMode.Open))
+            {
+                ModelDesign = (ModelDesign)xmlSerializer.Deserialize(fileStream);
 
+                uaModelDesignManager.XmlSerializerNamespaces.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+                uaModelDesignManager.XmlSerializerNamespaces.Add("xsd", "http://www.w3.org/2001/XMLSchema");
+
+                uaModelDesignManager.XmlSerializerNamespaces.Add("uax", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+                uaModelDesignManager.XmlSerializerNamespaces.Add("ua", "http://opcfoundation.org/UA/");
+
+            }
+        }
     }
 }

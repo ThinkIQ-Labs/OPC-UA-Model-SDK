@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="data\ModelDesign.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="data\ModelDesign.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ua.model.sdk\ua.model.sdk.csproj" />
   </ItemGroup>
 
