@@ -39,7 +39,7 @@ From the read test sample script:
 // this will parse the xml file and start a model
 // minor adjustments can be added to address TargetNamespace and XmlSerializerNamespaces
 // re-serializing will produce an almost identical xml file
-uaModelDesign md = new uaModelDesign("./data/modeldesign.xml");
+var md = new uaModelDesign("./data/modeldesign.xml");
 ```
 ### XML Namespaces are Attached to XMLSerializer
 
