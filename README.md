@@ -10,8 +10,8 @@ In particular for interoperability projects it is important to create such Infor
 
 This list is by no means complete, but these 2 references were especially helpful:
 
-- Macheronte.com: https://www.macheronte.com/en/opc-ua-model-design-lets-create-a-data-model/
 - Dr. Stefan Profanter: https://opcua.rocks/custom-information-models/
+- Macheronte.com: https://www.macheronte.com/en/opc-ua-model-design-lets-create-a-data-model/
 
 ## Reference Repos
 
