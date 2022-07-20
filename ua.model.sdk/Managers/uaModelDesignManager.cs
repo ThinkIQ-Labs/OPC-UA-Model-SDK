@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelCompiler;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,7 +8,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using ua.model.sdk.Model;
-using UAOOI.SemanticData.UAModelDesignExport.XML;
 
 namespace ua.model.sdk.Managers
 {
