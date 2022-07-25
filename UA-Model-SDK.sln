@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ua.model.sdk", "ua.model.sdk\ua.model.sdk.csproj", "{1A8B3A1A-6E11-4ED7-AE05-6DFC70CA34B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ua.model.sdk", "ua.model.sdk\ua.model.sdk.csproj", "{1A8B3A1A-6E11-4ED7-AE05-6DFC70CA34B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ua.model.sdk.demo", "ua.model.sdk.demo\ua.model.sdk.demo.csproj", "{68251290-341C-4522-8DA9-5029BAE7F428}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ua.model.sdk.demo", "ua.model.sdk.demo\ua.model.sdk.demo.csproj", "{68251290-341C-4522-8DA9-5029BAE7F428}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ua.model2nodeset.function", "ua.model2nodeset.function\ua.model2nodeset.function.csproj", "{0041726E-3879-4755-96A7-E74343D342F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{68251290-341C-4522-8DA9-5029BAE7F428}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68251290-341C-4522-8DA9-5029BAE7F428}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68251290-341C-4522-8DA9-5029BAE7F428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0041726E-3879-4755-96A7-E74343D342F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0041726E-3879-4755-96A7-E74343D342F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0041726E-3879-4755-96A7-E74343D342F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0041726E-3879-4755-96A7-E74343D342F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,36 +16,41 @@ namespace ua.model.sdk.demo.tests
             // thank you Stefan Profanter for the tutorial
             // https://opcua.rocks/custom-information-models/
 
-            var md = new uaModelDesign("https://opcua.rocks/UA", "animal");
+            var md = new ModelDesign("https://opcua.rocks/UA", "animal");
 
-            var animalNameSpace = md.uaNameSpaces["animal"].NameSpace.Value;
-            var opcUaNameSpace = md.uaNameSpaces["OpcUa"].NameSpace.Value;
+            var animalNameSpace = md.NamespacesDictionary["animal"].Value;
+            var opcUaNameSpace = md.NamespacesDictionary["OpcUa"].Value;
 
-            var animalType = md.uaObjectTypeDesignManager.AddBasicObjectTypeDesign(
+            var animalType = md.ObjectTypeDesignsAdd(
                 new XmlQualifiedName("AnimalType", animalNameSpace),
                 new XmlQualifiedName("BaseObjectType", opcUaNameSpace)
                 );
 
-            animalType.uaPropertyDesignManager.AddBasicPropertyDesign(
+            animalType.PropertyDesignsAdd(
                 new XmlQualifiedName("Name", animalNameSpace),
                 new XmlQualifiedName("String", opcUaNameSpace)
                 );
 
-            Console.WriteLine(md.uaModelDesignManager.GenerateXML());
-            Console.WriteLine(md.uaModelDesignManager.GenerateCSV());
+            Console.WriteLine(md.GenerateModelXML());
+            Console.WriteLine(md.GenerateModelCSV());
 
             var dirInfo = Directory.CreateDirectory($".\\out");
 
-            var xmlFileUrl = $"{dirInfo.FullName}\\test2.xml";
-            string aXmlFileContent = md.uaModelDesignManager.GenerateXML(xmlFileUrl);
-            Console.WriteLine(aXmlFileContent);
+            var modelXmlFileUrl = $"{dirInfo.FullName}\\test2.xml";
+            string aModelXmlFileContent = md.GenerateModelXML(modelXmlFileUrl);
+            Console.WriteLine(aModelXmlFileContent);
 
             var csvFileUrl = $"{dirInfo.FullName}\\test2.csv";
-            string aCsvFileContent = md.uaModelDesignManager.GenerateCSV(csvFileUrl);
+            string aCsvFileContent = md.GenerateModelCSV(csvFileUrl);
             Console.WriteLine(aCsvFileContent);
 
+            var nodesetXmlFileUrl = $"{dirInfo.FullName}\\test2nodeset2.xml";
+            string aNodesetXmlFileContent = md.GenerateNodesetXML(modelXmlFileUrl, nodesetXmlFileUrl);
+            Console.WriteLine(aNodesetXmlFileContent);
+
+
             var compilerExecutable = @"C:\Users\Public\source\repos\UA-ModelCompiler\build\bin\Debug\net6.0\Opc.Ua.ModelCompiler.exe";
-            md.uaModelDesignManager.CompileNodeset(compilerExecutable, xmlFileUrl, csvFileUrl, dirInfo.FullName);
+            md.CompileNodeset(compilerExecutable, modelXmlFileUrl, csvFileUrl, dirInfo.FullName);
         }
     }
 }

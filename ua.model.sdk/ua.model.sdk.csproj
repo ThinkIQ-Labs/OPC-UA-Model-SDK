@@ -7,7 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OOI.ModelCompiler" Version="3.1.1" />
+    <Compile Remove="Model\uaModelDesign.cs" />
+    <Compile Remove="Model\uaNameSpace.cs" />
+    <Compile Remove="Model\uaObjectTypeDesign.cs" />
+    <Compile Remove="Model\uaPropertyDesign.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Opc.Ua.ModelCompiler">
+      <HintPath>..\..\UA-ModelCompiler\build\bin\Debug\net6.0\Opc.Ua.ModelCompiler.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

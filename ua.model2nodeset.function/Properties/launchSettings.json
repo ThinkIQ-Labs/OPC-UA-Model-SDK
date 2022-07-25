@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "ua.model2nodeset.function": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7288",
+      "launchBrowser": false
+    }
+  }
+}
