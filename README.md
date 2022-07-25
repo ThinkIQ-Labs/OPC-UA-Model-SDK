@@ -106,7 +106,7 @@ From Dr. Stefan Profanter's animal type tutorial:
 ```XML
 TargetPublicationDate="2019-04-01T00:00:00Z"
 ```
-This is not easy using straight forward XML Serialization, but can be achieved by extending the partial ModelDesign.cs class (Prof. Postol - your ModelDesign.cs class is not partial, so this won't work with your nuget package):
+This is not easy using straight forward XML Serialization, but can be achieved by extending the partial ModelDesign.cs class:
 
 ```C#
 // we can extend the partial ModelDesign class to include a String attribute for our DateTime field
