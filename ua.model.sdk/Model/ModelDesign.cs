@@ -228,7 +228,6 @@ namespace ua.model.sdk.Model
                 return e.Message;
             }
 
-            Console.WriteLine("still here");
 
             // find the nodeset2.xml file
             string xmlNodeSet = File.ReadAllText(Directory.EnumerateFiles($"{dirInfo.FullName}").First(x => x.Contains("NodeSet2.xml")));

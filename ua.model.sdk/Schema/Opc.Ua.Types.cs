@@ -17564,7 +17564,7 @@ namespace Opc.Ua
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EUInformation", Namespace="http://opcfoundation.org/UA/2008/02/Types.xsd")]
     public partial class EUInformation : object, System.Runtime.Serialization.IExtensibleDataObject

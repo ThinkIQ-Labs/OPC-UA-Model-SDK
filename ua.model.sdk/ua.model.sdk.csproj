@@ -14,6 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Schema\UNECE_to_OPCUA.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Schema\UNECE_to_OPCUA.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
   </ItemGroup>
 
@@ -22,5 +32,6 @@
       <HintPath>..\..\UA-ModelCompiler\build\bin\Debug\net6.0\Opc.Ua.ModelCompiler.dll</HintPath>
     </Reference>
   </ItemGroup>
+
 
 </Project>
