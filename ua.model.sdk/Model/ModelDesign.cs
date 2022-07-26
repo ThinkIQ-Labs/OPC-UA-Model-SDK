@@ -177,7 +177,7 @@ namespace ua.model.sdk.Model
         }
 
         // generates XML for the nodeset using the OPC Foundation Compiler
-        public string GenerateNodesetXML(string xmlFileUrl, string? fileUrl = null, string? csvFileUrl=null)
+        public string GenerateNodesetXML(string? xmlFileUrl=null, string? fileUrl = null, string? csvFileUrl=null)
         {
 
             var dir = Path.GetTempPath();
@@ -185,7 +185,7 @@ namespace ua.model.sdk.Model
             var dirInfo = Directory.CreateDirectory($"{dir}{sessionId}");
             //Console.WriteLine(dirInfo.FullName);
 
-            string xml = File.ReadAllText(xmlFileUrl);
+            string xml = xmlFileUrl == null ? GenerateModelXML() : File.ReadAllText(xmlFileUrl);
             var xmlInputFileUrl = $@"{dirInfo.FullName}\input.xml";
             File.WriteAllText(xmlInputFileUrl, xml);
             //Console.WriteLine("xml created");

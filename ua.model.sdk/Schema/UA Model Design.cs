@@ -161,7 +161,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class Namespace {
@@ -287,7 +287,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class Reference {
@@ -353,7 +353,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class Parameter {
@@ -527,7 +527,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class LocalizedText {
@@ -605,7 +605,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class ListOfChildren {
@@ -630,7 +630,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class MethodDesign : InstanceDesign {
@@ -698,7 +698,7 @@ namespace ua.model.sdk.Model
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ViewDesign))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class InstanceDesign : NodeDesign {
@@ -863,7 +863,7 @@ namespace ua.model.sdk.Model
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ViewDesign))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class NodeDesign {
@@ -1141,7 +1141,7 @@ namespace ua.model.sdk.Model
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ObjectTypeDesign))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class TypeDesign : NodeDesign {
@@ -1208,7 +1208,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class ReferenceTypeDesign : TypeDesign {
@@ -1255,7 +1255,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class DataTypeDesign : TypeDesign {
@@ -1353,7 +1353,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class EncodingDesign : ObjectDesign {
@@ -1363,7 +1363,7 @@ namespace ua.model.sdk.Model
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EncodingDesign))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class ObjectDesign : InstanceDesign {
@@ -1398,7 +1398,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class VariableTypeDesign : TypeDesign {
@@ -1595,7 +1595,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class ObjectTypeDesign : TypeDesign {
@@ -1632,7 +1632,7 @@ namespace ua.model.sdk.Model
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(PropertyDesign))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class VariableDesign : InstanceDesign {
@@ -1783,7 +1783,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class DictionaryDesign : VariableDesign {
@@ -1805,7 +1805,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class PropertyDesign : VariableDesign {
@@ -1814,7 +1814,7 @@ namespace ua.model.sdk.Model
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     public partial class ViewDesign : InstanceDesign {
