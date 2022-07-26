@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Schema\UNECE_to_OPCUA.csv">
+    <Resource Include="Schema\UNECE_to_OPCUA.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +31,21 @@
     <Reference Include="Opc.Ua.ModelCompiler">
       <HintPath>..\..\UA-ModelCompiler\build\bin\Debug\net6.0\Opc.Ua.ModelCompiler.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 

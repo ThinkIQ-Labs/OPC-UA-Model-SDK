@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using ua.model.sdk.Properties;
 
 namespace Opc.Ua
 {
@@ -19,8 +21,10 @@ namespace Opc.Ua
                 if (_EUInformationList == null)
                 {
                     List<EUInformation> list = new List<EUInformation>();
-                    var lines = File.ReadAllLines("./Schema/UNECE_to_OPCUA.csv");
-                    var isHeader = true;
+
+                    var lines = Resources.UNECE_to_OPCUA.Split("\r\n");
+
+                        var isHeader = true;
                     foreach (var aLine in lines)
                     {
                         if (isHeader)
@@ -30,12 +34,15 @@ namespace Opc.Ua
                         else
                         {
                             var data = aLine.Split(",");
-                            list.Add(new EUInformation
+                            if (data.Length == 4)
                             {
-                                UnitId = int.Parse(data[1]),
-                                DisplayName = new LocalizedText { Text = data[2].Replace(@"""","") },
-                                Description = new LocalizedText { Text = data[3].Replace(@"""", "") }
-                            });
+                                list.Add(new EUInformation
+                                {
+                                    UnitId = int.Parse(data[1]),
+                                    DisplayName = new LocalizedText { Text = data[2].Replace(@"""", "") },
+                                    Description = new LocalizedText { Text = data[3].Replace(@"""", "") }
+                                });
+                            }
                         }
                     }
                     _EUInformationList = list;
