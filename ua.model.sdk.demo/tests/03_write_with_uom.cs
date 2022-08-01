@@ -37,6 +37,8 @@ namespace ua.model.sdk.demo.tests
                 new XmlQualifiedName("Float", opcUaNameSpace)
                 );
 
+            variableHeight.DefaultValue = variableHeight.CreateDefaultValueXmlElement("Float", "10");
+
             var propEU = variableHeight.PropertyDesignsAdd(
                 new XmlQualifiedName("EngineeringUnits", animalNameSpace),
                 new XmlQualifiedName("EUInformation", opcUaNameSpace)

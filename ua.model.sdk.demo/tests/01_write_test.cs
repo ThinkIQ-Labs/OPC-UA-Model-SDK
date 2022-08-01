@@ -26,10 +26,12 @@ namespace ua.model.sdk.demo.tests
                 new XmlQualifiedName("BaseObjectType", opcUaNameSpace)
                 );
 
-            animalType.PropertyDesignsAdd(
+            var nameProperty = animalType.PropertyDesignsAdd(
                 new XmlQualifiedName("Name", animalNameSpace),
                 new XmlQualifiedName("String", opcUaNameSpace)
                 );
+
+            nameProperty.DefaultValue = nameProperty.CreateDefaultValueXmlElement("String", "Rudolph");
 
             Console.WriteLine(md.GenerateModelXML());
             Console.WriteLine(md.GenerateModelCSV());

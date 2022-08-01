@@ -70,6 +70,12 @@ namespace ua.model.sdk.Model
             return newVariableDesign;
         }
 
-
+        public XmlElement CreateDefaultValueXmlElement(string dataType, string defaultValue, string uaxPrefix= "uax")
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            XmlElement defaultValueXML = xmlDocument.CreateElement(uaxPrefix, dataType, "http://opcfoundation.org/UA/2008/02/Types.xsd");
+            defaultValueXML.InnerText = defaultValue;
+            return defaultValueXML;
+        }
     }
 }
