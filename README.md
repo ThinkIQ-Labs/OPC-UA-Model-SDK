@@ -2,9 +2,11 @@
 
 ## Why this Project?
 
-Studying OPC UA, and in particular the Information Modeling aspects of it, we quickly realized that most established code base revolves around the cummunication bits and pieces. There is, however little guidance available for procedural creation of Information Models. The advise is either use a GUI tool, such as the excellent UaModeler by Unified Automation, or roll your own XML and then compile it using the UA Model Compiler.
+Studying OPC UA, and in particular the Information Modeling aspects of it, we realized that most established code base revolves around the cummunication bits and pieces. There is, however little guidance available for procedural creation of Information Models. The advise is either use a GUI tool, such as the excellent UaModeler by Unified Automation, or roll your own XML and then compile it using the UA Model Compiler.
 
 In particular for interoperability projects it is important to be able create such Information Models using code. Simply doing it "according to the ModelDesign.xsd" is harder than it sounds - especially if one wants to reproduce some of the examlple model designs out there.
+
+This project extends some of the partical classes of the ModelDesign.xsd and Opc.Ua.Types.xsd to make compilation of XML easier. It also references the OPC UA model compiler binaries so a modeldesign instance can be easily compiled into a nodeset XML file.
 
 ## Excellent Online Posts and Tutorials
 
@@ -15,14 +17,12 @@ This list is by no means complete, but these 2 references were especially helpfu
 
 ## Reference Repos
 
-These are good references for obtaining the ModelDesign.xsd and ModelDesign.xml files. Prof. Postol even let's you reference a Nuget package, which the OPC Foundation appears to be lacking at this time.
+These are good references for obtaining the ModelDesign.xsd/.cs and Opc.Ua.Types.xsd/.cs files. Prof. Postol let's you reference a Nuget package, which the OPC Foundation appears to be lacking at this time.
 
 - https://github.com/OPCFoundation/UA-ModelCompiler
 - https://github.com/mpostol & https://www.nuget.org/packages/UAOOI.SemanticData.UAModelDesignExport/
 
 ## Things that Become Easier Using this SDK
-
-If you are an XML ninja - this should be trivial. This repo uses the ModelDesign.xsd specifcation, and simply wraps useful bits and functionality - by prefixing classes with "ua" (for instance uaPropertyDesign.cs) and by adding managers (for instance uaPropertyDesignManager.cs).
 
 ### Start from Scratch or Use an Existing Model
 
@@ -31,7 +31,7 @@ From the write test sample script:
 // this will start a new model, create the Target(XML)Namespace attributes,
 // add XmlSerializerNamespaces
 // add a Namespace to the UA Namespaces collection
-var md = new uaModelDesign("https://opcua.rocks/UA", "animal");
+var md = new ModelDesign("https://opcua.rocks/UA", "animal");
 ```
 
 From the read test sample script:
@@ -39,7 +39,7 @@ From the read test sample script:
 // this will parse the xml file and start a model
 // minor adjustments can be added to address TargetNamespace and XmlSerializerNamespaces
 // re-serializing will produce an almost identical xml file
-var md = new uaModelDesign("./data/modeldesign.xml");
+var md = new ModelDesign("./data/modeldesign.xml");
 ```
 ### XML Namespaces are Attached to XMLSerializer
 
@@ -47,42 +47,98 @@ Most sample model.xml files create XML Namespace prefixes in the ModelDesign roo
 
 From the read test sample script:
 ```C#
-md.uaModelDesignManager.XmlSerializerNamespaces.Add("opc", "http://opcfoundation.org/UA/ModelDesign.xsd");
-md.uaModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfoundation.org/OPCUAServer");
+md.ModelDesignManager.XmlSerializerNamespaces.Add("opc", "http://opcfoundation.org/UA/ModelDesign.xsd");
+md.ModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfoundation.org/OPCUAServer");
 // which then gets used at serialization
 XmlSerializer.Serialize(xmlWriter, ModelDesign, XmlSerializerNamespaces);
 ```
 
-### Object Types have Managers that Make it Easier to Create and Add Content
+### Object Types have Methods that Make it Easier to Create and Add Content
 
-Adding custom types, and subsequently adding proeperties to types can be done like so:
+Adding custom types, and subsequently adding proeperties and variables to types can be done like so:
 
 ```C#
-var animalNameSpace = md.uaNameSpaces["animal"].NameSpace.Value;
-var opcUaNameSpace = md.uaNameSpaces["OpcUa"].NameSpace.Value;
-var animalType = md.uaObjectTypeDesignManager.AddBasicObjectTypeDesign(
+var animalNameSpace = md.NamespacesDictionary["animal"].Value;
+var opcUaNameSpace = md.NamespacesDictionary["OpcUa"].Value;
+var animalType = md.ObjectTypeDesignsAdd(
     new XmlQualifiedName("AnimalType", animalNameSpace),
     new XmlQualifiedName("BaseObjectType", opcUaNameSpace)
     );
-animalType.uaPropertyDesignManager.AddBasicPropertyDesign(
+animalType.PropertyDesignsAdd(
     new XmlQualifiedName("Name", animalNameSpace),
     new XmlQualifiedName("String", opcUaNameSpace)
     );
 ```
 
+### Engineering Units
+
+We extended the partial EUInformation class to make working with engineering units super easy: we added the UNICE unit's libary as csv resource to the project and added logic that creates an XMLElement that can be attached to the DefaultValue property of a EUInformation object. Below is an example of creating a "height in meters" variable with the UoM property.
+
+``` C#
+var variableHeight = animalType.VariableDesignsAdd(
+    new XmlQualifiedName("Height", animalNameSpace),
+    new XmlQualifiedName("Float", opcUaNameSpace)
+    );
+
+var propEU = variableHeight.PropertyDesignsAdd(
+    new XmlQualifiedName("EngineeringUnits", animalNameSpace),
+    new XmlQualifiedName("EUInformation", opcUaNameSpace)
+    );
+    
+EUInformation eui = EUInformation.EUInformationList.First(x => x.DisplayName.Text == "m");
+propEU.DefaultValue = eui.CreateXmlElement();
+```
+
+This becomes the following XML:
+
+``` XML
+  <Variable SymbolicName="animal:Height" DataType="ua:Float">
+    <Children>
+      <Property SymbolicName="animal:EngineeringUnits" DataType="ua:EUInformation">
+        <Children />
+        <DefaultValue>
+          <uax:ExtensionObject>
+            <uax:TypeId>
+              <uax:Identifier>i=888</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <uax:EUInformation>
+                <uax:NamespaceUri>http://www.opcfoundation.org/UA/units/un/cefact</uax:NamespaceUri>
+                <uax:UnitId>5067858</uax:UnitId>
+                <uax:DisplayName>
+                  <uax:Text>m</uax:Text>
+                </uax:DisplayName>
+                <uax:Description>
+                  <uax:Text>metre</uax:Text>
+                </uax:Description>
+              </uax:EUInformation>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+    </Children>
+  </Variable>
+```
+
 ### Creation of XML, CSV, and NodeSet2 Files
 
-The uaModelDesignManager has methods to create all the files needed for NodeSet2 compilation:
+The ModelDesign class has methods to create all the files needed for NodeSet2 compilation:
 
 ```C#
-string aXmlFileContent = md.uaModelDesignManager.GenerateXML(xmlFileUrl);
+string aXmlFileContent = md.GenerateModelXML(xmlFileUrl);
 Console.WriteLine(aXmlFileContent);
 
-string aCsvFileContent = md.uaModelDesignManager.GenerateCSV(csvFileUrl);
+string aCsvFileContent = md.GenerateModelCSV(csvFileUrl);
 Console.WriteLine(aCsvFileContent);
 
+// GenerateNodesetXML creates a temp directory and only retrieves the nodeset XML
+var nodesetXmlFileUrl = $"{dirInfo.FullName}\\test2nodeset2.xml";
+string aNodesetXmlFileContent = md.GenerateNodesetXML(modelXmlFileUrl, nodesetXmlFileUrl);
+Console.WriteLine(aNodesetXmlFileContent);
+
+// CompileNodeset gets a full set of files created by the Opc.Ua.ModelCompiler using the compiled binaries
 string compilerExecutable = @"C:\Users\Public\source\repos\UA-ModelCompiler\build\bin\Debug\net6.0\Opc.Ua.ModelCompiler.exe";
-md.uaModelDesignManager.CompileNodeset(compilerExecutable, xmlFileUrl, csvFileUrl, ".\\out");
+md.CompileNodeset(compilerExecutable, xmlFileUrl, csvFileUrl, ".\\out");
 
 ```
 
@@ -142,4 +198,8 @@ Finally, a default XML Namespace without a prefix can be created using string.Em
 ```C#
 md.uaModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfoundation.org/OPCUAServer");
 ```
+
+### EUInformation Objects for Engineering Units
+
+There's a bunch of unfinished business. The Opc.Ua.Types.cs class has strongly typed EUInformation available, but we haven't figured out how to serialize them correctly so that they can be attached as XMLElement to the DefaultValue of a EngineeringUnits ExtensionObject. To be continued...
 
