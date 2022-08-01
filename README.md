@@ -70,6 +70,22 @@ animalType.PropertyDesignsAdd(
     );
 ```
 
+### Default Values for Properties and Variables
+
+We extended the partial NodeDesign class to create an XML Element that can nicely serve as DefaultValue.
+
+``` C#
+variableHeight.DefaultValue = variableHeight.CreateDefaultValueXmlElement("Float", "10");
+```
+
+This becomes the following XML:
+
+``` XML
+<DefaultValue>
+  <uax:Float>10</uax:Float>
+</DefaultValue>
+```
+
 ### Engineering Units
 
 We extended the partial EUInformation class to make working with engineering units super easy: we added the UNICE unit's libary as csv resource to the project and added logic that creates an XMLElement that can be attached to the DefaultValue property of a EUInformation object. Below is an example of creating a "height in meters" variable with the UoM property.
@@ -202,4 +218,8 @@ md.uaModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfou
 ### EUInformation Objects for Engineering Units
 
 There's a bunch of unfinished business. The Opc.Ua.Types.cs class has strongly typed EUInformation available, but we haven't figured out how to serialize them correctly so that they can be attached as XMLElement to the DefaultValue of a EngineeringUnits ExtensionObject. To be continued...
+
+### Default Value XML Elements for NodeDesign
+
+The same issue as above. How can this be achieved without manually creating an XML Element...
 
