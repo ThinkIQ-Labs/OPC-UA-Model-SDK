@@ -13,7 +13,7 @@
 
 //_02_read_test.Run();
 
-//_03_write_with_uom.Run();
+_03_write_with_uom.Run();
 
 //_04_read_with_uom.Run();
 

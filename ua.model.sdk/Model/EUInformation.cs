@@ -51,47 +51,77 @@ namespace Opc.Ua
                 return _EUInformationList;
             }
         }
-        public XmlElement CreateXmlElement(string uaxPrefix="uax")
+
+        // using the xsd based classes to serialize EUInformation object we don't need this anymore
+        // yay!!!
+
+        //public XmlElement CreateXmlElement(string uaxPrefix="uax")
+        //{
+        //    XmlDocument xmlDocument = new XmlDocument();
+
+        //    XmlElement eObject = xmlDocument.CreateElement(uaxPrefix, "ExtensionObject", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+
+        //    var typeId = xmlDocument.CreateElement(uaxPrefix, "TypeId", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        //    var identifier = xmlDocument.CreateElement(uaxPrefix, "Identifier", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        //    identifier.InnerText = "i=888";
+        //    typeId.AppendChild(identifier);
+        //    eObject.AppendChild(typeId);
+
+        //    var body = xmlDocument.CreateElement(uaxPrefix, "Body", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        //    var eui = xmlDocument.CreateElement(uaxPrefix, "EUInformation", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+
+        //    var nsUri = xmlDocument.CreateElement(uaxPrefix, "NamespaceUri", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        //    nsUri.InnerText = "http://www.opcfoundation.org/UA/units/un/cefact";
+        //    eui.AppendChild(nsUri);
+
+        //    var unitId = xmlDocument.CreateElement(uaxPrefix, "UnitId", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        //    unitId.InnerText = UnitId.ToString();
+        //    eui.AppendChild(unitId);
+
+        //    var dispName = xmlDocument.CreateElement(uaxPrefix, "DisplayName", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        //    var dispText = xmlDocument.CreateElement(uaxPrefix, "Text", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        //    dispText.InnerText = DisplayName.Text; // "m";
+        //    dispName.AppendChild(dispText);
+        //    eui.AppendChild(dispName);
+
+
+        //    var descrName = xmlDocument.CreateElement(uaxPrefix, "Description", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        //    var descrText = xmlDocument.CreateElement(uaxPrefix, "Text", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        //    descrText.InnerText = Description.Text; // "metre";
+        //    descrName.AppendChild(descrText);
+        //    eui.AppendChild(descrName);
+
+        //    body.AppendChild(eui);
+
+        //    eObject.AppendChild(body);
+
+        //    return eObject;
+        //}
+
+        public XmlElement XMLFromEUInformation()
         {
-            XmlDocument xmlDocument = new XmlDocument();
+            ExtensionObjectForEUInformation extensionObject = new ExtensionObjectForEUInformation();
+            extensionObject.TypeId = new ExpandedNodeId()
+            {
+                Identifier = "888"
+            };
+            extensionObject.Body = new EUInformationBody()
+            {
+                EUInformation = this
+            };
 
-            XmlElement eObject = xmlDocument.CreateElement(uaxPrefix, "ExtensionObject", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-
-            var typeId = xmlDocument.CreateElement(uaxPrefix, "TypeId", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-            var identifier = xmlDocument.CreateElement(uaxPrefix, "Identifier", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-            identifier.InnerText = "i=888";
-            typeId.AppendChild(identifier);
-            eObject.AppendChild(typeId);
-
-            var body = xmlDocument.CreateElement(uaxPrefix, "Body", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-            var eui = xmlDocument.CreateElement(uaxPrefix, "EUInformation", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-
-            var nsUri = xmlDocument.CreateElement(uaxPrefix, "NamespaceUri", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-            nsUri.InnerText = "http://www.opcfoundation.org/UA/units/un/cefact";
-            eui.AppendChild(nsUri);
-
-            var unitId = xmlDocument.CreateElement(uaxPrefix, "UnitId", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-            unitId.InnerText = UnitId.ToString();
-            eui.AppendChild(unitId);
-
-            var dispName = xmlDocument.CreateElement(uaxPrefix, "DisplayName", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-            var dispText = xmlDocument.CreateElement(uaxPrefix, "Text", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-            dispText.InnerText = DisplayName.Text; // "m";
-            dispName.AppendChild(dispText);
-            eui.AppendChild(dispName);
-
-
-            var descrName = xmlDocument.CreateElement(uaxPrefix, "Description", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-            var descrText = xmlDocument.CreateElement(uaxPrefix, "Text", "http://opcfoundation.org/UA/2008/02/Types.xsd");
-            descrText.InnerText = Description.Text; // "metre";
-            descrName.AppendChild(descrText);
-            eui.AppendChild(descrName);
-
-            body.AppendChild(eui);
-
-            eObject.AppendChild(body);
-
-            return eObject;
+            XmlSerializerNamespaces XmlSerializerNamespaces = new XmlSerializerNamespaces();
+            XmlSerializerNamespaces.Add("uax", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+            XmlSerializer XmlSerializer = new XmlSerializer(typeof(ExtensionObjectForEUInformation));
+            using (TextWriter writer = new StringWriter())
+            using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }))
+            {
+                XmlSerializer.Serialize(xmlWriter, extensionObject, XmlSerializerNamespaces);
+                var xml = writer.ToString();
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(xml);
+                return xmlDoc.DocumentElement;
+            }
         }
 
         public static EUInformation EUInformationFromXML(XmlElement xmlElement)

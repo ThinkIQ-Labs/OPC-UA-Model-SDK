@@ -45,7 +45,8 @@ namespace ua.model.sdk.demo.tests
                 );
 
             EUInformation eui = EUInformation.EUInformationList.First(x => x.DisplayName.Text == "m");
-            propEU.DefaultValue = eui.CreateXmlElement();
+            //propEU.DefaultValue = eui.CreateXmlElement();
+            propEU.DefaultValue = eui.XMLFromEUInformation();
 
 
             Console.WriteLine(md.GenerateModelXML("./out/uomModel.xml"));
