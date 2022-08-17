@@ -5,6 +5,7 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Serialization;
 using ua.model.sdk.Properties;
 
 namespace Opc.Ua
@@ -92,5 +93,36 @@ namespace Opc.Ua
 
             return eObject;
         }
+
+        public static EUInformation EUInformationFromXML(XmlElement xmlElement)
+        {
+            ExtensionObjectForEUInformation defaultValueEuInformation = new ExtensionObjectForEUInformation();
+
+            var xmlSerializer = new XmlSerializer(typeof(ExtensionObjectForEUInformation));
+
+            StringReader rdr = new StringReader(xmlElement.OuterXml);
+
+            defaultValueEuInformation = (ExtensionObjectForEUInformation)xmlSerializer.Deserialize(rdr);
+
+            return defaultValueEuInformation.Body.EUInformation;
+        }
+
     }
+
+    [XmlRoot("ExtensionObject", Namespace = "http://opcfoundation.org/UA/2008/02/Types.xsd")]
+    public class ExtensionObjectForEUInformation
+    {
+        [XmlElement("TypeId")]
+        public ExpandedNodeId TypeId { get; set; }
+
+        [XmlElement("Body")]
+        public EUInformationBody Body { get; set; }
+    }
+
+    public class EUInformationBody
+    {
+        [XmlElement("EUInformation")]
+        public EUInformation EUInformation { get; set; }
+    }
+
 }

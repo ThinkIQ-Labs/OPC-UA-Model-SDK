@@ -39,9 +39,12 @@ namespace ua.model.sdk.Model
         {
             ModelDesign returnObject = new ModelDesign();
             var xmlSerializer = new XmlSerializer(typeof(ModelDesign));
-            using (FileStream fileStream = new FileStream(fileUrl, FileMode.Open))
+            // we're not using a FileStream, because it won't read utf-16 encoded xml
+            //using (FileStream fileStream = new FileStream(fileUrl, FileMode.Open))
+            string xml = File.ReadAllText(fileUrl);
+            using (TextReader reader = new StringReader(xml))
             {
-                returnObject = (ModelDesign)xmlSerializer.Deserialize(fileStream);
+                returnObject = (ModelDesign)xmlSerializer.Deserialize(reader);
 
                 returnObject.XmlSerializerNamespaces.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
                 returnObject.XmlSerializerNamespaces.Add("xsd", "http://www.w3.org/2001/XMLSchema");
