@@ -17,10 +17,12 @@ This list is by no means complete, but these two references were especially help
 
 ## Reference Repos
 
-These are good references for obtaining the ModelDesign.xsd/.cs and Opc.Ua.Types.xsd/.cs files. Prof. Postol let's you reference a Nuget package, which the OPC Foundation appears to be lacking at this time.
+These are good references for obtaining the ModelDesign.xsd/.cs and Opc.Ua.Types.xsd/.cs files. 
 
 - https://github.com/OPCFoundation/UA-ModelCompiler
 - https://github.com/mpostol & https://www.nuget.org/packages/UAOOI.SemanticData.UAModelDesignExport/
+
+Prof. Postol let's you reference a NuGet package, which the OPC Foundation appears to be lacking at this time.
 
 ## Things that Become Easier Using this SDK
 
@@ -55,7 +57,7 @@ XmlSerializer.Serialize(xmlWriter, ModelDesign, XmlSerializerNamespaces);
 
 ### Object Types have Methods that Make it Easier to Create and Add Content
 
-Adding custom types, and subsequently adding proeperties and variables to types can be done like so:
+Adding custom types, and subsequently adding properties and variables to types can be done this way:
 
 ```C#
 var animalNameSpace = md.NamespacesDictionary["animal"].Value;
@@ -88,7 +90,7 @@ This becomes the following XML:
 
 ### Engineering Units
 
-We extended the partial EUInformation class to make working with engineering units super easy: we added the UNICE unit's libary as csv resource to the project and added logic that creates an XMLElement that can be attached to the DefaultValue property of a EUInformation object. Below is an example of creating a "height in meters" variable with the UoM property.
+We extended the partial EUInformation class to make working with engineering units easire. We added the UNICE unit's libary as a csv resource to the project and added logic that creates an XMLElement that can be attached to the DefaultValue property of a EUInformation object. Below is an example of creating a "height in meters" variable with the UoM property.
 
 ``` C#
 var variableHeight = animalType.VariableDesignsAdd(
@@ -158,13 +160,13 @@ md.CompileNodeset(compilerExecutable, xmlFileUrl, csvFileUrl, ".\\out");
 
 ```
 
-## Note to Self
+## Related Considerations
 
-Some of these things took a long time to figure out...
+These were some of the challenges that took a long time to figure out.
 
-### Model Compilation Requires Model.xml Files to be Pretty-Printed
+### Model Compilation Requires Model.xml Files to be formatted correctly.
 
-We found that some of the most difficulat things to figure out is the "what's the minimum amount of stuff needed to make this work" part. Among those excercises we discovered that the ModelCompiler needs to be fed with properly formated xml, i.e. that Indent setting and the resulting line breaks are a must:
+We discovered that the ModelCompiler needs to be provided with properly formated xml, e.g. Indent setting and the resulting line breaks are a must:
 
 ```C#
 using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }))
@@ -172,13 +174,13 @@ using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent =
 
 ### DataTime Serialization with Specific Formating
 
-It's very straight forward to add a UTC-style time attribute when manually compiling a XML file (thanks Stefan for throwing that in...):
+It's very straightforward to add a UTC-style time attribute when manually compiling a XML file:
 
 From Dr. Stefan Profanter's animal type tutorial:
 ```XML
 TargetPublicationDate="2019-04-01T00:00:00Z"
 ```
-This is not easy using straight forward XML Serialization, but can be achieved by extending the partial ModelDesign.cs class:
+We appreciate Dr. Profanter's including this. This process is challengings using XML Serialization, but can be achieved by extending the partial ModelDesign.cs class:
 
 ```C#
 // we can extend the partial ModelDesign class to include a String attribute for our DateTime field
@@ -209,17 +211,19 @@ XmlSerializer serializer2 = new XmlSerializer(typeof(ModelDesign), toXmlIgnoreCl
 
 ### Creation of XML Namespaces without Prefix
 
-Finally, a default XML Namespace without a prefix can be created using string.Empty (Yes, we tried "". No, it didn't work.).
+Finally, a default XML Namespace without a prefix can be created using string.Empty. We tried "" but it did not.
 
 ```C#
 md.uaModelDesignManager.XmlSerializerNamespaces.Add(string.Empty, "http://opcfoundation.org/OPCUAServer");
 ```
 
-### EUInformation Objects for Engineering Units
+### Unfinished Items
 
-There's a bunch of unfinished business. The Opc.Ua.Types.cs class has strongly typed EUInformation available, but we haven't figured out how to serialize them correctly so that they can be attached as XMLElement to the DefaultValue of a EngineeringUnits ExtensionObject. To be continued...
+#### EUInformation Objects for Engineering Units
 
-### Default Value XML Elements for NodeDesign
+Opc.Ua.Types.cs class has strongly typed EUInformation available. We haven't figured out how to serialize them correctly so that they can be attached as XMLElement to the DefaultValue of a EngineeringUnits ExtensionObject. 
 
-The same issue as above. How can this be achieved without manually creating an XML Element...
+#### Default Value XML Elements for NodeDesign
+
+The same issue as above. We can not achieve this yet without manually creating an XML Element.
 
