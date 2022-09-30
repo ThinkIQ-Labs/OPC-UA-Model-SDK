@@ -2,11 +2,11 @@
 
 ## Why this Project?
 
-Studying OPC UA, and in particular the Information Modeling aspects of it, we realized that most established code base revolves around the cummunication bits and pieces. There is, however little guidance available for procedural creation of Information Models. The advise is either use a GUI tool, such as the excellent UaModeler by Unified Automation, or roll your own XML and then compile it using the UA Model Compiler.
+Studying OPC UA, and in particular the Information Modeling aspects of it, we realized that most established code base revolves around the communication. There is, however, little guidance available for procedural creation of Information Models. The advice is either to use a GUI tool, such as the excellent UaModeler by Unified Automation, or to create your own XML and then compile it using the UA Model Compiler.
 
-In particular for interoperability projects it is important to be able create such Information Models using code. Simply doing it "according to the ModelDesign.xsd" is harder than it sounds - especially if one wants to reproduce some of the examlple model designs out there.
+For interoperability projects, in particular, it is important to be able create such Information Models using code. Simply doing it "according to the ModelDesign.xsd" is harder than it sounds - especially if one wants to reproduce some of the available examlple model designs.
 
-This project extends some of the partical classes of the ModelDesign.xsd and Opc.Ua.Types.xsd to make compilation of XML easier. It also references the OPC UA model compiler binaries so a modeldesign instance can be easily compiled into a nodeset XML file.
+This project extends some of the pratical classes of the ModelDesign.xsd and Opc.Ua.Types.xsd to make compilation of XML easier. It also references the OPC UA model compiler binaries so a modeldesign instance can be easily compiled into a nodeset XML file.
 
 ## Excellent Online Posts and Tutorials
 
