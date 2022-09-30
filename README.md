@@ -6,11 +6,11 @@ Studying OPC UA, and in particular the Information Modeling aspects of it, we re
 
 For interoperability projects, in particular, it is important to be able create such Information Models using code. Simply doing it "according to the ModelDesign.xsd" is harder than it sounds - especially if one wants to reproduce some of the available examlple model designs.
 
-This project extends some of the pratical classes of the ModelDesign.xsd and Opc.Ua.Types.xsd to make compilation of XML easier. It also references the OPC UA model compiler binaries so a modeldesign instance can be easily compiled into a nodeset XML file.
+This project extends some of the pratical classes of the ModelDesign.xsd and Opc.Ua.Types.xsd to make compilation of XML easier. It also references the OPC UA model compiler binaries so a model design instance can be easily compiled into a nodeset XML file.
 
 ## Excellent Online Posts and Tutorials
 
-This list is by no means complete, but these 2 references were especially helpful:
+This list is by no means complete, but these two references were especially helpful:
 
 - Dr. Stefan Profanter: https://opcua.rocks/custom-information-models/
 - Macheronte.com: https://www.macheronte.com/en/opc-ua-model-design-lets-create-a-data-model/
