@@ -103,7 +103,7 @@ namespace Opc.Ua
             ExtensionObjectForEUInformation extensionObject = new ExtensionObjectForEUInformation();
             extensionObject.TypeId = new ExpandedNodeId()
             {
-                Identifier = "888"
+                Identifier = "i=888"
             };
             extensionObject.Body = new EUInformationBody()
             {

@@ -17,4 +17,8 @@ _03_write_with_uom.Run();
 
 //_04_read_with_uom.Run();
 
-_05_parse_EUInformation.Run();
+//_05_parse_EUInformation.Run();
+
+//_06_convert_model.Run();
+
+//_07_create_nested_type.Run();

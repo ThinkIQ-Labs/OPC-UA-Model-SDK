@@ -165,10 +165,13 @@ namespace ua.model.sdk.Model
                 {
                     typeCounter++;
                     writer.WriteLine($"{aType.SymbolicName.Name},{10000 + typeCounter},ObjectType");
-                    foreach (var aProperty in aType.Children.Items)
+                    if (aType.Children.Items != null)
                     {
-                        propertyCounter++;
-                        writer.WriteLine($"{aProperty.SymbolicName.Name},{20000 + propertyCounter},Variable");
+                        foreach (var aProperty in aType.Children.Items)
+                        {
+                            propertyCounter++;
+                            writer.WriteLine($"{aProperty.SymbolicName.Name},{20000 + propertyCounter},Variable");
+                        }
                     }
                 }
                 if (fileUrl != null)

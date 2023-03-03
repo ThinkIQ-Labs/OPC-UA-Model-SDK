@@ -9,10 +9,14 @@
 
   <ItemGroup>
     <None Remove="data\ModelDesign.xml" />
+    <None Remove="data\ModelDesignMotor.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="data\ModelDesign.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\ModelDesignMotor.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

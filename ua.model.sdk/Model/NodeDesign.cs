@@ -70,6 +70,26 @@ namespace ua.model.sdk.Model
             return newVariableDesign;
         }
 
+        [XmlIgnore]
+        public Dictionary<string, ObjectDesign> ObjectDesigns
+        {
+            get
+            {
+                return GetDictionaryOfT<ObjectDesign>();
+            }
+        }
+        public ObjectDesign ObjectDesignsAdd(XmlQualifiedName symbolicName, XmlQualifiedName typeDefinition)
+        {
+            ObjectDesign newObjectDesign = new ObjectDesign
+            {
+                SymbolicName = symbolicName,
+                TypeDefinition = typeDefinition,
+                //ReferenceType = typeDefinition,
+            };
+            AddToChildren<ObjectDesign>(newObjectDesign);
+            return newObjectDesign;
+        }
+
         public XmlElement CreateDefaultValueXmlElement(string dataType, string defaultValue, string uaxPrefix= "uax")
         {
             XmlDocument xmlDocument = new XmlDocument();
